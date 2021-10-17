@@ -60,7 +60,7 @@ const CreateAcc = () => {
 
     useEffect(() => {
 
-        axios.get(apiUrl + "/accounts/123567").then((data) => {
+        axios.get(apiUrl + "/accounts/"+ localStorage.getItem("bankId") ).then((data) => {
             if (accounts)
                 setaccounts(data.data);
                 console.log(data.data);

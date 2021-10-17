@@ -21,6 +21,20 @@ const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(1),
     },
+    emptyTable: {
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(1),
+        height: '100%',
+        backgroundColor: '#e6eded',
+        cursor: 'pointer',
+        transitionDuration: '0.5s',
+        transition: '0.5s',
+        '&:hover': {
+            backgroundColor: "rgb(247, 247, 247,0.8)",
+            transition: '0.5s',
+        },
+        padding:'2%'
+    }
 }));
 
 const Accounts = () => {
@@ -31,7 +45,7 @@ const Accounts = () => {
 
     useEffect(() => {
 
-        axios.get(apiUrl + "/accounts").then((data) => {
+        axios.get(apiUrl + "/accounts/" + localStorage.getItem("bankId") ).then((data) => {
             if (accounts)
                 setaccounts(data.data);
         })
@@ -56,12 +70,12 @@ const Accounts = () => {
 
                         <Col span={10} key={data.account_no} style={{ margin: "1%" }}>
                             <Link to={`/accounts/${data.account_no}`} >
-                                <Paper elevation={3} component="div">
+                                <Paper elevation={3} component="div"  className={classes.emptyTable} >
 
                                     <h2>{data.account_name}</h2>
                                     <span>{data.account_type}</span>
                                     <p>{data.account_no}</p>
-                                    <h4>{data.balance}</h4>
+                                    <h4>{data.balance  + " " + data.currency}</h4>
 
                                 </Paper>
                             </Link>
@@ -82,14 +96,14 @@ const Accounts = () => {
                     accounts &&
                     accounts.map(data =>
                         data.account_type === "deposit" &&
-                        <Col span={10} key={data.account_no} style={{ margin: "1%" }}>
+                        <Col span={10} key={data.account_no} style={{ margin: "1%" }} >
                             <Link to={`/accounts/${data.account_no}`} >
-                                <Paper elevation={3} component="div">
+                                <Paper elevation={3} component="div"  className={classes.emptyTable}>
 
                                     <h2>{data.account_name}</h2>
                                     <span>{data.account_type}</span>
                                     <p>{data.account_no}</p>
-                                    <h4>{data.balance}</h4>
+                                    <h4>{data.balance + " " + data.currency}</h4>
 
                                 </Paper>
                             </Link>
@@ -109,14 +123,14 @@ const Accounts = () => {
                     accounts &&
                     accounts.map(data =>
 
-                        <Col span={10} key={data.account_no} style={{ margin: "1%" }}>
+                        <Col span={10} key={data.account_no} style={{ margin: "1%" }} >
                             <Link to={`/accounts/${data.account_no}`} >
-                                <Paper elevation={3} component="div">
+                                <Paper elevation={3} component="div" className={classes.emptyTable}>
 
                                     <h2>{data.account_name}</h2>
                                     <span>{data.account_type}</span>
                                     <p>{data.account_no}</p>
-                                    <h4>{data.balance}</h4>
+                                    <h4>{data.balance + " " + data.currency}</h4>
 
                                 </Paper>
                             </Link>

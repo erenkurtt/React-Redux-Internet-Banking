@@ -7,7 +7,9 @@ import {
 import Navigation from '../../Navigation';
 import { Row, Col } from 'antd';
 
-// import { makeStyles } from '@material-ui/core/styles';
+import Display from './Display';
+
+import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import {
     Link
@@ -15,14 +17,28 @@ import {
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//         flexGrow: 1,
-//     },
-//     button: {
-//         margin: theme.spacing(1),
-//     },
-// }));
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    },
+    button: {
+        margin: theme.spacing(1),
+    },
+    emptyTable: {
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(1),
+        height: '100%',
+        backgroundColor: '#e6eded',
+        transitionDuration: '0.5s',
+        transition: '0.5s',
+        '&:hover': {
+            backgroundColor: "rgb(247, 247, 247,0.8)",
+            transition: '0.5s',
+        },
+        
+        padding:'2%'
+    }
+}));
 
 const DetailedCard = () => {
     
@@ -35,6 +51,8 @@ const DetailedCard = () => {
     // const [transferFrom, setTransferFrom] = useState([]);
     // const [transferTo, setTransferTo] = useState([]);
     const [cardPayments, setcardPayments] = useState([]);
+
+    const classes = useStyles();
 
     useEffect(() => {
         
@@ -100,7 +118,7 @@ const DetailedCard = () => {
 
                                 <Col span={10} key={data.id} style={{ margin: "1%" }}>
                                     
-                                        <Paper elevation={3} component="div"  >
+                                        <Paper elevation={3} component="div"  className={classes.emptyTable} >
 
                                             <h2>{data.card_no}</h2>
                                             <span>{data.bank_id}</span>
@@ -115,14 +133,8 @@ const DetailedCard = () => {
                     </Row>
 
 
-                    {
-                        cardPayments.map((data) =>
-                            <div key={data.id}>
-                                <span>{data.date}</span>
-                                <span>{data.to_where}</span> -
-                                <span>{data.cost}</span>
-                            </div>
-                        )
+                    {cardPayments &&
+                        <Display creditPayments={cardPayments} />
                     }
 
                 </Col>

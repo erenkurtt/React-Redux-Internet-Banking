@@ -193,12 +193,12 @@ const PickPayment = () => {
             setfailed(false);
 
             PostTransfer({
-                from_name: companyName,
-                from_no: '-',
-                from_iban: ' - ' + payment_type,
-                to_name: selectedAcc.account_name,
-                to_no: selectedAcc.account_no,
-                to_iban: selectedAcc.iban,
+                from_name: selectedAcc.account_name,
+                from_no: selectedAcc.account_no , 
+                from_iban: selectedAcc.iban , 
+                to_name: companyName , 
+                to_no: companyName +  ' -  ' + payment_type,
+                to_iban: ' - ' + payment_type,
                 total: amount,
                 date: (new Date()).toString()
             });

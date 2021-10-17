@@ -114,7 +114,7 @@ const SelfAccounts = () => {
                                 <h2>{data.account_name}</h2>
                                 <span>{data.account_type}</span>
                                 <p>{data.account_no}</p>
-                                <h4>{data.balance}</h4>
+                                <h4>{data.balance + " " + data.currency }</h4>
 
 
                             </Paper>
@@ -147,7 +147,7 @@ const SelfAccounts = () => {
                                 <h2>{data.account_name}</h2>
                                 <span>{data.account_type}</span>
                                 <p>{data.account_no}</p>
-                                <h4>{data.balance}</h4>
+                                <h4>{data.balance + " " + data.currency}</h4>
 
                             </Paper>
 
@@ -177,7 +177,7 @@ const SelfAccounts = () => {
                                 <h2>{data.account_name}</h2>
                                 <span>{data.account_type}</span>
                                 <p>{data.account_no}</p>
-                                <h4>{data.balance}</h4>
+                                <h4>{data.balance + " " + data.currency}</h4>
 
 
                             </Paper>

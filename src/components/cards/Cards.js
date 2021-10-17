@@ -21,6 +21,20 @@ const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(1),
     },
+    emptyTable: {
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(1),
+        height: '100%',
+        backgroundColor: '#e6eded',
+        cursor: 'pointer',
+        transitionDuration: '0.5s',
+        transition: '0.5s',
+        '&:hover': {
+            backgroundColor: "rgb(247, 247, 247,0.8)",
+            transition: '0.5s',
+        },
+        padding:'2%'
+    }
 }));
 
 
@@ -32,7 +46,7 @@ const Cards = () => {
 
     useEffect(() => {
 
-        axios.get(apiUrl + "/cards").then((data) => {
+        axios.get(apiUrl + "/cards/privCard/" + localStorage.getItem("bankId")).then((data) => {
             if (cards)
                 setcards(data.data);
         })
@@ -40,7 +54,7 @@ const Cards = () => {
         return () => { }
     }, [])
 
-    // const classes = useStyles();
+    const classes = useStyles();
     // const [value, setValue] = React.useState(0);
 
     // const handleChange = (_event, newValue) => {
@@ -56,7 +70,7 @@ const Cards = () => {
 
                         <Col span={10} key={data.card_no} style={{ margin: "1%" }}>
                             <Link to={`/cards/${data.card_no}`} >
-                                <Paper elevation={3}>
+                                <Paper elevation={3}  className={classes.emptyTable}   >
 
                                     <h2>{data.card_no}</h2>
                                     <span>{data.bank_id}</span>

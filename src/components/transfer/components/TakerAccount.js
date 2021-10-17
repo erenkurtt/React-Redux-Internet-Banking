@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as transferActions from '../../../actions/TransferActions';
 import '../css/TakerAccount.css';
+import Alert from '@material-ui/lab/Alert';
 
 import { Select } from 'antd';
 import { Input } from 'antd';
@@ -23,6 +24,11 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         margin: theme.spacing(1),
+    },
+
+    warning: {
+        width: '50%',
+        marginBottom: '2%'
     },
 
     // ActiveTables: {
@@ -59,6 +65,9 @@ const TakerAccount = () => {
 
 
     const apiUrl = useSelector(state => state.ApiReducer);
+
+    const senderAcc = useSelector(state => state.TransferReducer);
+
     const [accounts, setaccounts] = useState([]);
 
 
@@ -105,6 +114,7 @@ const TakerAccount = () => {
 
                 <Col span={24}>
 
+                <Alert severity="info"  className={classes.warning}  >You can only transfer with same currency.</Alert> 
                
                     <Select
                         value={ valueIban }
@@ -124,6 +134,7 @@ const TakerAccount = () => {
 
                         {
                             selectedAccounts.map((data) => 
+                               data.id !==  senderAcc.sender.id &&  data.currency === senderAcc.sender.currency  &&
                             <Option key={data.account_name} value={data.iban}>{data.iban}</Option>)
                         }
 
@@ -147,6 +158,7 @@ const TakerAccount = () => {
 
                         {
                             selectedAccounts.map((data) => 
+                              data.id !==  senderAcc.sender.id &&  data.currency === senderAcc.sender.currency  &&
                             <Option key={data.account_name} value={data.account_no}>{data.account_no}</Option>)
                         }
 

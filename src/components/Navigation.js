@@ -10,9 +10,8 @@ import LoopIcon from '@material-ui/icons/Loop';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import CardTravelIcon from '@material-ui/icons/CardTravel';
 import EuroIcon from '@material-ui/icons/Euro';
-import StarsIcon from '@material-ui/icons/Stars';
-import CreateIcon from '@material-ui/icons/Create';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import { useHistory } from "react-router-dom";
 import {
   Link
 } from "react-router-dom";
@@ -35,6 +34,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Navigation() {
   const classes = useStyles();
+  let history = useHistory();
+
+  function logOut(){
+    localStorage.setItem("bankId" , "");
+
+    setTimeout(() => {
+      history.push("/login");
+      window.location.reload();
+
+    }, 200);
+    
+  }
 
   return (
     <div className={classes.root}>
@@ -102,7 +113,7 @@ export default function Navigation() {
 
         
 
-        <ListItem button className={classes.items} >
+        <ListItem button className={classes.items}  onClick={() => logOut()}>
           <ListItemIcon>
             <PowerSettingsNewIcon />
           </ListItemIcon>

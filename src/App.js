@@ -17,55 +17,80 @@ import Currency from './components/currency/Currency';
 import PickPayment from './components/payments/altComps/PickPayment';
 import ChooseAcc from './components/credits/altComps/ChooseAcc';
 import CreateCard from './components/cards/altComps/CreateCard';
+import Login from './components/Login';
+import  { Redirect } from 'react-router-dom'
 
 function App() {
   return (
     <Router>
 
       <div>
+        {
+          localStorage.getItem("bankId") !== "" ?
+            <Switch>
 
-        <Switch>
-          <Route path="/accounts" exact>
-            <Accounts />
-          </Route>
+              <Route path="/" exact>
+                <Accounts />
+              </Route>
 
-          <Route path="/accounts/:acc_no" children={<DetailedAcc />} />
+              <Route path="/accounts" exact>
+                <Accounts />
+              </Route>
 
-          <Route path="/payment" exact>
-            <Payments />
-          </Route>
+              <Route path="/accounts/:acc_no" children={<DetailedAcc />} />
 
-          <Route path="/payment/:payment_type" children={<PickPayment />} />
+              <Route path="/payment" exact>
+                <Payments />
+              </Route>
 
-         
-          <Route path="/create-account" exact >
-            <CreateAcc />
-          </Route>
+              <Route path="/payment/:payment_type" children={<PickPayment />} />
 
-          <Route path="/transfer" exact >
-            <Transfer />
-          </Route>
 
-          <Route path="/cards" exact >
-            <Cards />
-          </Route>
+              <Route path="/create-account" exact >
+                <CreateAcc />
+              </Route>
 
-          <Route path="/cards/:card_no" children={<DetailedCard />} />
+              <Route path="/transfer" exact >
+                <Transfer />
+              </Route>
 
-          <Route path="/create-new-card" children={<CreateCard />} />
+              <Route path="/cards" exact >
+                <Cards />
+              </Route>
 
-          <Route path="/credits" exact >
-            <Credit />
-          </Route>
+              <Route path="/cards/:card_no" children={<DetailedCard />} />
 
-          <Route path="/credits/chooseAcc/:currency_type" children={<ChooseAcc />} />
-          
+              <Route path="/create-new-card" children={<CreateCard />} />
 
-          <Route path="/currency" exact >
-            <Currency />
-          </Route>
-          
-        </Switch>
+              <Route path="/credits" exact >
+                <Credit />
+              </Route>
+
+              <Route path="/credits/chooseAcc/:currency_type" children={<ChooseAcc />} />
+
+
+              <Route path="/currency" exact >
+                <Currency />
+              </Route>
+
+            </Switch>
+
+            :
+
+            <Switch >
+
+              <Route path="/login" >
+                <Login />
+              </Route>
+
+              <Redirect to='/login'  />
+
+            </Switch>
+
+
+        }
+
+
 
 
       </div>

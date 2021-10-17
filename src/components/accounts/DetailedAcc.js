@@ -5,9 +5,36 @@ import {
     useParams
 } from "react-router-dom";
 import Navigation from '../Navigation';
-import {Row,Col} from 'antd';
+import { Row, Col } from 'antd';
+import Display from './Display';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    },
+    button: {
+        margin: theme.spacing(1),
+    },
+    emptyTable: {
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(1),
+        height: '100%',
+        backgroundColor: '#e6eded',
+        transitionDuration: '0.5s',
+        transition: '0.5s',
+        '&:hover': {
+            backgroundColor: "rgb(247, 247, 247,0.8)",
+            transition: '0.5s',
+        },
+        
+        padding:'2%'
+    }
+}));
 
 const DetailedAcc = () => {
+    const classes = useStyles();
 
 
     let { acc_no } = useParams();
@@ -81,33 +108,43 @@ const DetailedAcc = () => {
         <div>
             <Row>
                 <Col span={7}>
-                    <Navigation/>
+                    <Navigation />
                 </Col>
 
                 <Col span={17}>
 
-                    <p>{accountInfos.account_name}</p>
-                    <p>{accountInfos.account_type}</p>
-                    <p>{accountInfos.whereIs}</p>
-                    <p>{accountInfos.account_no}</p>
-                    <p>{accountInfos.iban}</p>
-                    <p>{accountInfos.currency}</p>
+                    <Col span={10} style={{ margin: "1%" }} >
+                     
+                            <Paper elevation={3} component="div" className={classes.emptyTable}>
+
+                                <h2>{accountInfos.account_name}</h2>
+                                <span>{accountInfos.account_type}</span>
+                                <p>{accountInfos.account_no}</p>
+                                <p>{accountInfos.iban}</p>
+                                <p>{accountInfos.whereIs}</p>
+                                <h4>{accountInfos.balance + " " + accountInfos.currency }</h4>
+
+                            </Paper>
+                      
+                    </Col>
 
 
-                    {accountInfos.account_name}
-                    {accountInfos.account_type}
-                    {accountInfos.whereIs}
-                    {accountInfos.account_no}
-                    {accountInfos.iban}
-                    {accountInfos.currency}
+
 
 
                     {
+                        transfers &&
+                        <Display transfers={transfers} accountInfos={accountInfos} />
+                    }
+
+
+
+                    {/* {
                         transfers.map((data) => data.from_no === accountInfos.account_no ?
                             <div key={data.id}> <span>{data.from_no}</span> <span>{data.to_no}</span> - <span>{data.total}</span></div>
                             :
                             <div key={data.id}> <span>{data.from_no}</span> <span>{data.to_no}</span> + <span>{data.total}</span></div>)
-                    }
+                    } */}
 
                 </Col>
             </Row>
