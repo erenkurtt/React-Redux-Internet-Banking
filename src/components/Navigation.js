@@ -38,12 +38,12 @@ export default function Navigation() {
 
   function logOut(){
     localStorage.setItem("bankId" , "");
-
+    history.push("/login");
     setTimeout(() => {
-      history.push("/login");
+      
       window.location.reload();
 
-    }, 200);
+    }, 500);
     
   }
 

@@ -7,12 +7,11 @@ import { Button, Radio } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import Alert from '@material-ui/lab/Alert';
 import '../App.css';
-import { useHistory } from "react-router-dom";
 
 const Login = () => {
 
     const apiUrl = useSelector(state => state.ApiReducer);
-    let history = useHistory();
+    
      
     const [usernumb, setusernumb] = useState("");
     const [password, setpassword] = useState("");
@@ -36,11 +35,12 @@ const Login = () => {
                     if(result.data[0].password === password){
                         console.log("yes");
                         localStorage.setItem("bankId", payload );
+                        window.location.replace("/accounts");
 
                         setTimeout(() => {
-                            history.push("/accounts");
+                           
                             window.location.reload();
-                        }, 200);
+                        }, 500);
                         
                     }
                     else{
@@ -69,10 +69,10 @@ const Login = () => {
                 <Col span={12} >
                     <h1 style={{textAlign:'center'}}> Eren Kurt Bank Application</h1>
 
-                    <Input size="large" placeholder="User Number" prefix={<UserOutlined />}
+                    <Input size="large" placeholder="User Number (exp 123567)" prefix={<UserOutlined />}
                      style={{width:'70%' , margin:'1% 15% 1% 15%'}} onChange={(e) => setusernumb(e.target.value)} />
 
-                    <Input.Password size="large" placeholder="Password" 
+                    <Input.Password size="large" placeholder="Password (exp eren123)" 
                      style={{ width:'70%' ,   margin:'1% 15% 1% 15%'}} onChange={(e) => setpassword(e.target.value)} />
 
                     <Button   type="primary" size={"large"}  onClick={() => returnValue( usernumb ) }

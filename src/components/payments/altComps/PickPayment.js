@@ -90,7 +90,7 @@ const PickPayment = () => {
 
     useEffect(() => {
 
-        axios.get(apiUrl + "/accounts").then((data) => {
+        axios.get(apiUrl + "/accounts/" + localStorage.getItem("bankId") ).then((data) => {
             if (accounts) {
                 setaccounts(data.data);
                 let arr = Array(data.data.length).fill(classes.emptyTable);
@@ -99,7 +99,7 @@ const PickPayment = () => {
             }
         });
 
-        axios.get(apiUrl + "/cards").then((data) => {
+        axios.get(apiUrl + "cards/privCard/" + localStorage.getItem("bankId") ).then((data) => {
             if (cards)
                 setcards(data.data);
             let arr = Array(data.data.length).fill(classes.emptyTable);

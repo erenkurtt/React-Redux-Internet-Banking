@@ -88,7 +88,7 @@ const ChooseAcc = () => {
 
     useEffect(() => {
 
-        axios.get(apiUrl + "/accounts").then((data) => {
+        axios.get(apiUrl + "/accounts/" + localStorage.getItem("bankId") ).then((data) => {
             if (accounts) {
                 setaccounts(data.data);
                 let arr = Array(data.data.length).fill(classes.emptyTable);
