@@ -47,7 +47,7 @@ const CreateCard = () => {
 
     useEffect(() => {
 
-        axios.get(apiUrl + "/cards").then((data) => {
+        axios.get(apiUrl + "/cards/privCard/" + localStorage.getItem("bankId")).then((data) => {
             if (cards)
                 setcards(data.data);
         })
@@ -98,8 +98,8 @@ const CreateCard = () => {
         if (limit >= 500 && selectCurrency.name !== '') {
             PostCard({
                 username: cards[0].username,
-                bank_id: 312456,
-                card_no: "CARD-" + cards[0].bank_id + "-" + "Eren".toUpperCase() + "-" + setId,
+                bank_id: localStorage.getItem("bankId"),
+                card_no: "CARD-" +  localStorage.getItem("bankId") + "-" + cards[0].username.slice(0,2).toUpperCase() + "-" + setId,
                 last_month: d.getMonth(),
                 last_year: d.getFullYear() + 4,
                 ccv: Math.floor(Math.random() * 1000) + 100,

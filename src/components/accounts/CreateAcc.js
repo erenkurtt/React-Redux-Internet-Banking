@@ -60,15 +60,15 @@ const CreateAcc = () => {
 
     useEffect(() => {
 
-        axios.get(apiUrl + "/accounts/"+ localStorage.getItem("bankId") ).then((data) => {
+        axios.get(apiUrl + "/accounts/" + localStorage.getItem("bankId")).then((data) => {
             if (accounts)
                 setaccounts(data.data);
-                console.log(data.data);
+            console.log(data.data);
         })
 
         axios.get(apiUrl + "/accounts").then((data) => {
-         
-            settotalAcc( data.data[ data.data.length -1 ].id );
+
+            settotalAcc(data.data[data.data.length - 1].id);
         })
 
         return () => { }
@@ -97,8 +97,8 @@ const CreateAcc = () => {
             let result =
                 await axios.post(apiUrl + "/accounts", payload, {
                     headers: { Authorization: `Bearer` },
-                }).then( result => setsuccpost(true) )
-                
+                }).then(result => setsuccpost(true))
+
         }
         catch (e) {
             console.log(e);
@@ -112,18 +112,18 @@ const CreateAcc = () => {
             let setId = totalAcc + 1
 
             let postAcc = {
-                username: "Eren Kurt",
-                bank_id: 123567,
+                username: accounts[accounts.length - 1].username,
+                bank_id: localStorage.getItem("bankId"),
                 account_name: accName,
                 account_type: selectType.name === "DRAWING" ? "drawing" : "deposit",
                 due_date: duedate === null ? 0 : duedate.time,
                 account_no: "ACC-" + accounts[accounts.length - 1].bank_id + "-" +
-                    "Eren".toUpperCase() + "-" + setId,
+                    accounts[accounts.length - 1].username.slice(0,2).toUpperCase() + "-" + setId,
                 whereIs: "NY US",
                 balance: 0,
                 currency: selectCurrency.name,
                 iban: "IBAN-" + accounts[accounts.length - 1].bank_id + "-" +
-                    "Eren".toUpperCase() + "-" + setId
+                    accounts[accounts.length - 1].username.slice(0,2).toUpperCase() + "-" + setId
             }
 
             PostNewAccount(postAcc);
@@ -131,7 +131,7 @@ const CreateAcc = () => {
         }
         else {
             setalerted(true)
-          
+
         }
 
 
@@ -182,12 +182,12 @@ const CreateAcc = () => {
                     {
                         alerted &&
                         <Alert severity="error" className={classes.warning}   >Please fill all inputs</Alert>
-                        
+
                     }
 
                     {
-                        succpost && 
-                        <Alert severity="success"  className={classes.warning}  >New Account Has been Created!</Alert> 
+                        succpost &&
+                        <Alert severity="success" className={classes.warning}  >New Account Has been Created!</Alert>
                     }
 
 

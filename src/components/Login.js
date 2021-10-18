@@ -69,10 +69,10 @@ const Login = () => {
                 <Col span={12} >
                     <h1 style={{textAlign:'center'}}> Eren Kurt Bank Application</h1>
 
-                    <Input size="large" placeholder="User Number (exp 123567)" prefix={<UserOutlined />}
+                    <Input size="large" placeholder="User Number (exp 123567 or 312456) " prefix={<UserOutlined />}
                      style={{width:'70%' , margin:'1% 15% 1% 15%'}} onChange={(e) => setusernumb(e.target.value)} />
 
-                    <Input.Password size="large" placeholder="Password (exp eren123)" 
+                    <Input.Password size="large" placeholder="Password (exp eren123 or can123)" 
                      style={{ width:'70%' ,   margin:'1% 15% 1% 15%'}} onChange={(e) => setpassword(e.target.value)} />
 
                     <Button   type="primary" size={"large"}  onClick={() => returnValue( usernumb ) }
