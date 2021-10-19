@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import { InputText } from 'primereact/inputtext';
+
 import { Row, Col } from 'antd';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';

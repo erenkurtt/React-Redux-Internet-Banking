@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { Row, Col } from 'antd';
